@@ -7,7 +7,10 @@
     >参数设置</c-header>
     <player-config></player-config>
     <player-number></player-number>
-    <c-button :on-click="start">去发牌</c-button>
+    <c-button
+      size="l"
+      :on-click="start"
+    >去发牌</c-button>
   </div>
 </template>
 

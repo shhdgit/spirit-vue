@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="'button button-style-' + type"
+    :class="'button button-style-' + type + ' button-size-' + size"
     @click="onClick"
   ><slot></slot></button>
 </template>
@@ -11,6 +11,10 @@
       type: {
         type: String,
         default: 'normal'
+      },
+      size: {
+        type: String,
+        default: 'm'
       },
       onClick: {
         type: Function,
@@ -23,6 +27,7 @@
 <style lang="less" scoped>
   @prefix: button;
   @style: button-style;
+  @size: button-size;
 
   .@{prefix} {
     position: relative;
@@ -51,5 +56,14 @@
   .@{style}-normal {
     background-color: #fbb435;
     color: #fff;
+  }
+  .@{size}-l {
+    width: 90%;
+  }
+  .@{size}-m {
+    width: 82%;
+  }
+  .@{size}-s {
+    width: 30%;
   }
 </style>
