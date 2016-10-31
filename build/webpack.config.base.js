@@ -18,7 +18,7 @@ module.exports = {
       'component': `${ PROJECT_ROOT }/src/component`,
       'view': `${ PROJECT_ROOT }/src/view`,
       'public': `${ PROJECT_ROOT }/public`,
-
+      'gamekit': `${ PROJECT_ROOT }/src/gamekit`
     }
   },
   module: {

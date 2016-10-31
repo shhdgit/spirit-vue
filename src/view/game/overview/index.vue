@@ -1,18 +1,28 @@
 <template>
   <div class="overview">
     <c-header
-      l-btn-name="icon-chevron-left2"
       r-btn-name="icon-cross"
-      v-header-back
       v-header-close
     >法官台本</c-header>
+    <div class="ids">
+      <id-mask></id-mask>
+    </div>
+    <c-button :on-click="start">开始游戏</c-button>
   </div>
 </template>
 
 <script>
   export default {
+    methods: {
+      start () {
+        this.$router.push( '/game/timeline' )
+      }
+    },
+
     components: {
-      CHeader: require( 'component/header' )
+      CHeader: require( 'component/header' ),
+      IdMask: require( 'component/id-mask' ),
+      CButton: require( 'component/button' )
     }
   }
 </script>
@@ -30,5 +40,16 @@
     margin-top: 2rem;
 
     background-color: @main-color;
+  }
+  .ids {
+    height: 70%;
+    padding-left: 4%;
+
+    overflow: scroll;
+
+    & > div {
+      float: left;
+      margin: 5%;
+    }
   }
 </style>

@@ -34,6 +34,11 @@ const router = new VueRouter( {
       component: resolve => require( [ 'view/game/timeline' ], resolve )
     },
     {
+      name: 'operator',
+      path: '/game/operator',
+      component: resolve => require( [ 'view/game/operator' ], resolve )
+    },
+    {
       name: 'report',
       path: '/game/report',
       component: resolve => require( [ 'view/game/report' ], resolve )
