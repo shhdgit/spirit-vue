@@ -57,6 +57,10 @@
     background-color: #fbb435;
     color: #fff;
   }
+  .@{style}-warn {
+    background-color: #f66e6e;
+    color: #fff;
+  }
   .@{size}-l {
     width: 90%;
   }
@@ -64,6 +68,6 @@
     width: 82%;
   }
   .@{size}-s {
-    width: 30%;
+    width: 40%;
   }
 </style>
