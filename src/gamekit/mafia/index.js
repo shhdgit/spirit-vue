@@ -1,6 +1,9 @@
 export default {
   game: 'mafia',
-  rule: [
+  default: 8,
+  min: 8,
+  max: 16,
+  procedure: [
     {
       stage: 'night',
       icon: 'moon-o',
@@ -34,12 +37,30 @@ export default {
       ]
     }
   ],
-  win: function ( info ) {
+  winCondition: function ( info ) {
     const camp = info.camp
   },
-  idmap: {
-    1: '平民',
-    2: '杀手',
-    3: '警察'
-  }
+  idmap: [
+    {
+      name: '平民',
+      uid: 1,
+      proportion: function ( total ) {
+        return parseInt( parseInt( total ) * .5 )
+      }
+    },
+    {
+      name: '杀手',
+      uid: 2,
+      proportion: function ( total ) {
+        return parseInt( parseInt( total ) * .25 )
+      }
+    },
+    {
+      name: '警察',
+      uid: 3,
+      proportion: function ( total ) {
+        return parseInt( parseInt( total ) * .25 )
+      }
+    }
+  ]
 }

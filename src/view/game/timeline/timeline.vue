@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-for="stage in config.rule"
+      v-for="stage in procedure"
       class="stage"
     >
       <div class="stage-icon">
@@ -20,13 +20,17 @@
 </template>
 
 <script>
-  import config from 'gamekit/mafia'
+  import { mapState } from 'vuex'
 
   export default {
-    data () {
-      return {
-        config
-      }
+    computed: {
+      ...mapState( {
+        procedure: state => state.config.procedure
+      } )
+    },
+
+    mounted () {
+      console.log(this.procedure)
     }
   }
 </script>

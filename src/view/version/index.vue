@@ -21,12 +21,38 @@
 </template>
 
 <script>
+  import { mapMutations, mapActions } from 'vuex'
+  import * as types from 'vuex/types'
+  import mafia from 'gamekit/mafia'
+
+  const gamekits = {
+    mafia
+  }
+
   export default {
+    computed: {
+      lastGame () {
+        const local = localStorage.getItem( 'lastGame' )
+
+        return local ? local : 'mafia'
+      }
+    },
+
     methods: {
+      ...mapMutations( [ types.INFO_SET_PLAYERS ] ),
+      ...mapActions( [ 'setConfig' ] ),
       showMenu () {
         console.log( 'show menu' )
       },
       jump2lastGame () {
+        const lastGame = this.lastGame
+
+        this[ types.INFO_SET_PLAYERS ]( gamekits[ lastGame ].default )
+        this.setConfig( {
+          identity: gamekits[ lastGame ].idmap,
+          procedure: gamekits[ lastGame ].procedure,
+          condition: gamekits[ lastGame ].winCondition
+        } )
         this.$router.push( '/configuration' )
       }
     },

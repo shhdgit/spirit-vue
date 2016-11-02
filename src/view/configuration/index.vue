@@ -5,7 +5,7 @@
       :l-btn-fn="back"
       r-btn-name="icon-question-circle"
     >参数设置</c-header>
-    <player-config></player-config>
+    <player-config ref="config"></player-config>
     <player-number></player-number>
     <c-button
       size="l"
@@ -15,15 +15,24 @@
 </template>
 
 <script>
+  import * as types from 'vuex/types'
+
   export default {
+    computed: {
+      ids () {
+        return this.$refs.config.distriIds
+      }
+    },
+
     methods: {
       back () {
         this.$router.replace( '/version' )
       },
-
       start () {
+        this.$store.commit( types.INFO_SET_CAMP, this.ids )
         this.$router.push( '/game/checkid' )
-      }
+      },
+      allotRole () {}
     },
 
     components: {

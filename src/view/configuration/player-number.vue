@@ -7,13 +7,43 @@
     <input
       type="number"
       autoComplete="off"
+      v-model="thisNumber"
+      @input="inputHandle"
     ></input>
     <span>人</span>
   </c-block>
 </template>
 
 <script>
+  import { mapState, mapMutations } from 'vuex'
+  import * as types from 'vuex/types'
+
   export default {
+    data () {
+      return {
+        thisNumber: 0
+      }
+    },
+
+    computed: {
+      ...mapState( {
+        playernumber: ( { information } ) => information.players
+      } )
+    },
+
+    methods: {
+      ...mapMutations( {
+        changePlayerNum: types.INFO_SET_PLAYERS
+      } ),
+      inputHandle () {
+        this.changePlayerNum( this.thisNumber )
+      }
+    },
+
+    mounted () {
+      this.thisNumber = this.playernumber
+    },
+
     components: {
       CBlock: require( 'component/block' )
     }
@@ -41,6 +71,7 @@
       color: @sub-color;
       font-size: 1rem;
       outline: 0;
+      text-align: center;
     }
   }
 </style>

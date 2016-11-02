@@ -1,5 +1,6 @@
 // CDN Version. NPM Version need add Vue.ues( VueRouter )
 import VueRouter from 'vue-router'
+import store from 'vuex/store'
 
 const router = new VueRouter( {
   routes: [
@@ -54,6 +55,19 @@ const router = new VueRouter( {
     }
   ]
 } )
+
+router.beforeEach((to, from, next) => {
+  if ( to.name !== 'bootstrap' && to.name !== 'version' ) {
+    if ( !store.state.config.identity.length ) {
+      location.hash = ''
+      location.reload()
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 
 export default router
 
