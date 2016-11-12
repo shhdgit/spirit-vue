@@ -1,6 +1,6 @@
 # 桌游精灵
 
-ptt桌游精灵（Vue 2.x版）
+ptt桌游精灵（Vue 2.x版）[预览](http://rollaround.cn/spirit)
 
 ## Dependencies
 
