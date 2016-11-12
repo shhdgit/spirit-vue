@@ -50,6 +50,7 @@
         this[ types.INFO_SET_PLAYERS ]( gamekits[ lastGame ].default )
         this.setConfig( {
           identity: gamekits[ lastGame ].idmap,
+          peopleNum: gamekits[ lastGame ].peopleNum,
           procedure: gamekits[ lastGame ].procedure,
           roleConfig: gamekits[ lastGame ].roleConfig,
           condition: gamekits[ lastGame ].winCondition

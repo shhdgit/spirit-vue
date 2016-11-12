@@ -114,9 +114,10 @@
             this.record( parseInt( i ) )
             this.$delete( this.show, i )
           } )
+          this.operate( indexs )
+        } else {
+          alert( '请选择目标' )
         }
-
-        this.operate( indexs )
       }
     },
 

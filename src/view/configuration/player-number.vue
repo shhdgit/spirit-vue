@@ -9,7 +9,7 @@
       autoComplete="off"
       v-model="thisNumber"
     ></input>
-    <span>人</span>
+    <span>人（{{ peopleNum[ 0 ] }}-{{ peopleNum[ 1 ] }}人）</span>
   </c-block>
 </template>
 
@@ -20,7 +20,8 @@
   export default {
     computed: {
       ...mapState( {
-        playernumber: ( { information } ) => information.players
+        playernumber: ( { information } ) => information.players,
+        peopleNum: ( { config } ) => config.peopleNum
       } ),
       thisNumber: {
         get () {

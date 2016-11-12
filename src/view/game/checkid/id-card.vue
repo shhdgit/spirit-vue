@@ -2,6 +2,7 @@
   <c-block
     class="card"
     width="80%"
+    height=""
   >
     <div
       class="card-content"

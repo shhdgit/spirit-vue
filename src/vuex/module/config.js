@@ -2,6 +2,7 @@ import * as types from 'vuex/types'
 
 const state = {
   identity: [],
+  peopleNum: [],
   procedure: {},
   winCondition: {},
   roleConfig: {},
@@ -26,12 +27,13 @@ const mutations = {
 }
 
 const actions = {
-  setConfig ( { commit }, { identity, procedure, condition, roleConfig } ) {
+  setConfig ( { commit, state }, { identity, procedure, condition, roleConfig, peopleNum } ) {
     commit( types.CONFIG_SET_IDENTITY, identity )
     commit( types.CONFIG_SET_PROCEDURE, procedure )
     commit( types.CONFIG_SET_CONDITION, condition )
     commit( types.CONFIG_SET_ROLE_CONFIG, roleConfig )
     commit( types.CONFIG_SET_FLOW, procedure )
+    state.peopleNum = peopleNum
   }
 }
 
