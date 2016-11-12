@@ -10,7 +10,7 @@
       <div class="config-list">
         <ul v-show="!showConfig">
           <li v-for="( id, index ) in identity">
-            <span>{{ id.name }}</span> {{ distriIds[ '_' + index ] }} 人
+            <span>{{ id.name }}</span> {{ distriIds[ id.uid ] }} 人
           </li>
         </ul>
         <ul v-show="showConfig">
@@ -18,7 +18,7 @@
             <span>{{ id.name }}</span>
             <input
               type="number"
-              v-model="distriIds[ '_' + index ]"
+              v-model="distriIds[ id.uid ]"
             > 人
           </li>
         </ul>
@@ -29,7 +29,8 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapMutations } from 'vuex'
+  import * as types from 'vuex/types'
 
   export default {
     data () {
@@ -42,64 +43,57 @@
     computed: {
       ...mapState( {
         identity: ( { config } ) => config.identity,
+        roleConfig: ( { config } ) => config.roleConfig,
         players: ( { information } ) => information.players
       } )
     },
 
     watch: {
       players () {
-        this.updateIds()
+        this.setIds( 'update' )
       }
     },
 
     methods: {
-      initIds () {
-        const players = this.players
-
-        this.identity.forEach( ( id, index ) => {
-          const number = id.proportion( players )
-
-          this.$set( this.distriIds, `_${ index }`, number ? number : 0 )
-        } )
+      ...mapMutations( {
+        changePlayerNum: types.INFO_SET_PLAYERS
+      } ),
+      init ( id, number ) {
+        this.$set( this.distriIds, id, number ? number : 0 )
       },
-      updateIds () {
+      update ( id, number ) {
+        this.distriIds[ id ] = number ? number : 0
+      },
+      setIds ( op ) {
         const players = this.players
+        const config = this.roleConfig[ players ]
+        const idArray = config ? config.split( ',' ) : []
 
         this.identity.forEach( ( id, index ) => {
-          const number = id.proportion( players )
+          const number = parseInt( idArray[ id.uid - 1 ] )
 
-          this.distriIds[ `_${ index }` ] = number ? number : 0
+          this[ op ]( id.uid, number )
         } )
       },
       confirmNumber () {
         if ( this.showConfig ) {
           const ids = this.distriIds
           let total = 0,
-              others = 0,
               keys = Object.keys( ids )
 
           keys.forEach( key => {
             total += parseInt( ids[ key ] )
           } )
-          keys.shift()
-          keys.forEach( key => {
-            others += parseInt( ids[ key ] )
-          } )
 
-          if ( total > this.players ) {
-            this.balancePlayer( others )
-          }
+          this.changePlayerNum( total )
         }
 
         this.showConfig = !this.showConfig
-      },
-      balancePlayer ( others ) {
-        this.distriIds._0 = this.players - others
       }
     },
 
     mounted () {
-      this.initIds()
+      this.setIds( 'init' )
     }
   }
 </script>

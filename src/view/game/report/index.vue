@@ -5,20 +5,39 @@
       :l-btn-fn="jump2timeline"
       r-btn-name="icon-cross"
       v-header-close
-    >黑夜解密</c-header>
+    >{{ mixProcedureFlow.title }}</c-header>
     <div class="content">
       <img src="public/image/killtip.png">
       <div class="record">
-        <p>1号被杀死了 身份是平民</p>
-        <p>2号被杀死了 身份是平民</p>
+        <p v-for="r in recordEvent[ recordDayIndex ]">{{ r }}</p>
       </div>
     </div>
-    <c-button>第二天</c-button>
+    <c-button
+      :on-click="mixProcedureNext"
+    >{{ mixProcedureFlow.button || '下一步' }}</c-button>
   </div>
 </template>
 
 <script>
+  import { procedure } from 'mixin'
+  import { mapState } from 'vuex'
+
   export default {
+    mixins: [ procedure ],
+
+    computed: {
+      ...mapState( {
+        record: ( { record } ) => record,
+        timeline: ( { record } ) => record.timeline
+      } ),
+      recordDayIndex () {
+        return this.record.timeline[ 0 ].day - 1
+      },
+      recordEvent () {
+        return this.record.events
+      }
+    },
+
     methods: {
       jump2timeline () {
         this.$router.push( '/game/timeline' )

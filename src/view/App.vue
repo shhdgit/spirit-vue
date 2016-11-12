@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import store from '../vuex/store'
+  import store from 'vuex/store'
 
   export default {
     store

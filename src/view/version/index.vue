@@ -51,6 +51,7 @@
         this.setConfig( {
           identity: gamekits[ lastGame ].idmap,
           procedure: gamekits[ lastGame ].procedure,
+          roleConfig: gamekits[ lastGame ].roleConfig,
           condition: gamekits[ lastGame ].winCondition
         } )
         this.$router.push( '/configuration' )

@@ -15,10 +15,15 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import * as types from 'vuex/types'
 
   export default {
     computed: {
+      ...mapState( {
+        identity: ( { config } ) => config.identity,
+        players: ( { information } ) => information.players
+      } ),
       ids () {
         return this.$refs.config.distriIds
       }
@@ -30,9 +35,45 @@
       },
       start () {
         this.$store.commit( types.INFO_SET_CAMP, this.ids )
+        this.$store.commit( types.INFO_SET_IDS, this.allotRole() )
+        this.$store.commit( types.INFO_SET_ALIVE, this.players )
+        this.$store.commit( types.RECO_ADD_DAY )
         this.$router.push( '/game/checkid' )
       },
-      allotRole () {}
+      allotRole () {
+        const ids = this.ids
+        let tempRoles = [],
+            roles = []
+
+        Object.keys( ids ).forEach( id => {
+          const num = parseInt( ids[ id ] )
+
+          for ( let i = 0; i < num; i++ ) {
+            const newId = parseInt( id )
+            let identity
+
+            this.identity.some( id => {
+              if ( id.uid === newId ) {
+                identity = id.name
+                return true
+              } else {
+                return false
+              }
+            } )
+
+            tempRoles.push( { name: identity, uid: newId, alive: 1 } )
+          }
+        } )
+
+        while ( tempRoles.length ) {
+          const len = tempRoles.length
+          let random = Math.floor( Math.random() * len ) % len
+
+          roles.push( tempRoles.splice( random, 1 )[ 0 ] )
+        }
+
+        return roles
+      }
     },
 
     components: {

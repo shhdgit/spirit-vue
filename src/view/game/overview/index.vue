@@ -5,14 +5,26 @@
       v-header-close
     >法官台本</c-header>
     <div class="ids">
-      <id-mask></id-mask>
+      <id-mask
+        v-for="( role, index ) in roles"
+        :index="index + 1"
+        :role="role.name"
+      ></id-mask>
     </div>
     <c-button :on-click="start">开始游戏</c-button>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
+    computed: {
+      ...mapState( {
+        roles: ( { information } ) => information.identity
+      } )
+    },
+
     methods: {
       start () {
         this.$router.push( '/game/timeline' )

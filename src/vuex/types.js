@@ -1,8 +1,17 @@
 export const CONFIG_SET_IDENTITY = 'config/SET_IDENTITY'
 export const CONFIG_SET_PROCEDURE = 'config/SET_PROCEDURE'
 export const CONFIG_SET_CONDITION = 'config/SET_CONDITION'
+export const CONFIG_SET_ROLE_CONFIG = 'config/SET_ROLE_CONFIG'
+export const CONFIG_SET_FLOW = 'config/SET_FLOW'
 
 export const INFO_SET_PLAYERS = 'information/SET_PLAYERS'
 export const INFO_SET_CAPM = 'information/SET_CAMP'
 export const INFO_SET_ALIVE = 'information/SET_ALIVE'
 export const INFO_SET_IDS = 'information/SET_IDS'
+export const INFO_KILL = 'information/KILL'
+export const INFO_SAVE = 'information/SAVE'
+export const INFO_CHANGE_OP_INDEX = 'information/CHANGE_OP_INDEX'
+
+export const RECO_ADD_DAY = 'record/ADD_DAY'
+export const RECO_UPDATE_FLOW = 'record/UPDATE_FLOW'
+export const RECO_NEW_EVENT = 'record/NEW_EVENT'

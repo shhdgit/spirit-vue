@@ -18,9 +18,15 @@
   export default {
     props: {
       lBtnName: String,
-      lBtnFn: Function,
+      lBtnFn: {
+        type: Function,
+        default () {}
+      },
       rBtnName: String,
-      rBtnFn: Function
+      rBtnFn: {
+        type: Function,
+        default () {}
+      }
     }
   }
 </script>

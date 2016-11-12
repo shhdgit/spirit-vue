@@ -3,14 +3,15 @@
     class="id-mask"
     @click="clickHandle"
   >
-    <p class="identity">杀手</p>
+    <p class="identity">{{ role }}</p>
     <div
       class="container"
-      v-show="mask"
+      v-show="thisMask"
     >
       <img src="public/image/idmask.jpg">
     </div>
-    <p class="id">1号</p>
+    <p class="id">{{ index }}号</p>
+    <slot></slot>
   </div>
 </template>
 
@@ -22,9 +23,30 @@
       }
     },
 
+    props: {
+      index: Number,
+      role: String,
+      lock: {
+        type: Number,
+        default: 0
+      }
+    },
+
+    computed: {
+      thisMask () {
+        if ( this.lock ) {
+          return this.lock === 1 ? 0 : 1
+        } else {
+          return this.mask
+        }
+      }
+    },
+
     methods: {
       clickHandle () {
-        this.mask = !this.mask
+        if ( !this.lock ) {
+          this.mask = !this.mask
+        }
       }
     }
   }

@@ -36,12 +36,12 @@ const router = new VueRouter( {
     },
     {
       name: 'operator',
-      path: '/game/operator',
+      path: '/game/operator/:order',
       component: resolve => require( [ 'view/game/operator' ], resolve )
     },
     {
       name: 'report',
-      path: '/game/report',
+      path: '/game/report/:order',
       component: resolve => require( [ 'view/game/report' ], resolve )
     },
     {

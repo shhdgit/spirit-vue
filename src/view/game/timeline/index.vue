@@ -7,18 +7,26 @@
       v-header-close
     >法官台本</c-header>
     <c-accordion>
-      <c-panel title="第二天">
-        <timeline></timeline>
-      </c-panel>
-      <c-panel title="第一天">
-        <timeline></timeline>
+      <c-panel
+        v-for="flow in timeline"
+        :title="'第' + flow.day + '天'"
+      >
+        <timeline :day="flow.day"></timeline>
       </c-panel>
     </c-accordion>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
+    computed: {
+      ...mapState( {
+        timeline: ( { record } ) => record.timeline
+      } )
+    },
+
     methods: {
       back () {
         this.$router.push( '/game/overview' )
