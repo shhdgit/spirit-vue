@@ -12,42 +12,42 @@ const router = new VueRouter( {
     {
       name: 'version',
       path: '/version',
-      component: resolve => require( [ 'view/version' ], resolve )
+      component: require( 'view/version' )
     },
     {
       name: 'configuration',
       path: '/configuration',
-      component: resolve => require( [ 'view/configuration' ], resolve )
+      component: require( 'view/configuration' )
     },
     {
       name: 'checkid',
       path: '/game/checkid',
-      component: resolve => require( [ 'view/game/checkid' ], resolve )
+      component: require( 'view/game/checkid' )
     },
     {
       name: 'overview',
       path: '/game/overview',
-      component: resolve => require( [ 'view/game/overview' ], resolve )
+      component: require( 'view/game/overview' )
     },
     {
       name: 'timeline',
       path: '/game/timeline',
-      component: resolve => require( [ 'view/game/timeline' ], resolve )
+      component: require( 'view/game/timeline' )
     },
     {
       name: 'operator',
       path: '/game/operator/:order',
-      component: resolve => require( [ 'view/game/operator' ], resolve )
+      component: require( 'view/game/operator' )
     },
     {
       name: 'report',
       path: '/game/report/:order',
-      component: resolve => require( [ 'view/game/report' ], resolve )
+      component: require( 'view/game/report' )
     },
     {
       name: 'result',
       path: '/game/result',
-      component: resolve => require( [ 'view/game/result' ], resolve )
+      component: require( 'view/game/result' )
     },
     {
       path: '*',
